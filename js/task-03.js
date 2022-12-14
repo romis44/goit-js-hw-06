@@ -15,15 +15,11 @@ const images = [
 
 const galleryEL = document.querySelector(".gallery");
 galleryEL.style.listStyle = "none";
-const photoImg = (images) => {
-  return images.map((image) => {
-    const photoEl = document.createElement("li");
-    photoEl.insertAdjacentHTML("beforeend", "<img>");
-    photoEl.firstChild.src = image.url;
-    photoEl.firstChild.alt = image.alt;
-    photoEl.firstChild.style.width = "340px";
-    return photoEl;
-  });
+galleryEL.style.display = "flex";
+galleryEL.style.gap = "20px";
+
+const photoEl = ({ url, alt }) => {
+  return `<li><img src="${url}" alt = "${alt}" width = 320px /> </li>`;
 };
-const img = photoImg(images);
-galleryEL.append(...img);
+const makeImage = images.map(photoEl).join("");
+galleryEL.insertAdjacentHTML("afterbegin", makeImage);
